@@ -3,7 +3,7 @@ module github.com/solo-io/bumblebee
 go 1.17
 
 require (
-	github.com/cilium/ebpf v0.7.0
+	github.com/cilium/ebpf v0.9.3
 	github.com/gdamore/tcell/v2 v2.4.1-0.20210905002822-f057f0a857a1
 	github.com/manifoldco/promptui v0.9.0
 	github.com/mitchellh/hashstructure/v2 v2.0.2
@@ -87,4 +87,3 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
 
-replace github.com/cilium/ebpf => github.com/solo-io/cilium-ebpf v0.7.1-0.20211109175948-0418708068be

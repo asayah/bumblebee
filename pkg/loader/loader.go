@@ -224,6 +224,20 @@ func (l *loader) Load(ctx context.Context, opts *LoadOptions) error {
 					}
 				}
 				defer tp.Close()
+			case ebpf.XDP:
+				var tp link.Link
+				var err error
+				if strings.HasPrefix(prog.SectionName, "tracepoint/") {
+					tokens := strings.Split(prog.AttachTo, "/")
+					if len(tokens) != 2 {
+						return fmt.Errorf("unexpected tracepoint section '%v'", prog.AttachTo)
+					}
+					tp, err = link.Tracepoint(tokens[0], tokens[1], coll.Programs[name])
+					if err != nil {
+						return fmt.Errorf("error attaching to tracepoint '%v': %w", prog.Name, err)
+					}
+				}
+				defer tp.Close()
 			default:
 				return errors.New("only kprobe programs supported")
 			}
